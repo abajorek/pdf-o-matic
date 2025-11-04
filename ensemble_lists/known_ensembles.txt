@@ -1,0 +1,65 @@
+# Midwest Clinic Known Ensembles
+# Format: One ensemble name per line
+# Lines starting with # are comments
+#
+# NOTE: Ensemble names are case-sensitive and must match the URL format exactly.
+# Check the Midwest Clinic archives to verify the correct formatting for each year.
+
+# ============================================================================
+# MILITARY BANDS (Often at Midwest, consistent naming)
+# ============================================================================
+
+USAF
+MarinesWest
+MarinesEast
+PresidentsOwn
+ArmyFieldBand
+
+# ============================================================================
+# UNIVERSITY BANDS (Major university programs)
+# ============================================================================
+
+NorthTexas
+Michigan
+Illinois
+Northwestern
+Indiana
+Cincinnati
+Kansas
+Texas
+FloridaState
+
+# ============================================================================
+# PROFESSIONAL ENSEMBLES
+# ============================================================================
+
+DallasWinds
+
+# ============================================================================
+# HIGH SCHOOL BANDS (Examples - verify exact formatting)
+# ============================================================================
+
+# Note: High school naming can vary by year. Common formats:
+# - SchoolName (e.g., "Buchholz", "Broken Arrow")
+# - CitySchoolName (e.g., "ColonialForge")
+# Always verify against Midwest archives for correct formatting!
+
+# Buchholz
+# BrokenArrow
+# ColonialForge
+# Avon
+
+# ============================================================================
+# TIPS FOR ADDING ENSEMBLES:
+# ============================================================================
+#
+# 1. Check Midwest Clinic archives for exact spelling/formatting
+# 2. Try both with and without spaces (some use underscores, some don't)
+# 3. Watch for capitalization - it matters!
+# 4. Some ensembles might have different names in different years
+# 5. Run a test download for a single year first to verify formatting
+#
+# Example test command:
+#   python scraper.py --year 2019 --ensemble USAF
+#
+# ============================================================================
