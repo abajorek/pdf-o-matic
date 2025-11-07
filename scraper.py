@@ -10,6 +10,7 @@ Usage:
     python scraper.py --year 2009 --ensemble Buchholz
     python scraper.py --years 2015-2023 --ensemble USAF
     python scraper.py --list ensemble_lists/known_ensembles.txt --years 2010-2023
+    python scraper.py --year 2019 --discover  # Auto-discover all ensembles!
     python scraper.py --year 2019 --ensemble NorthTexas --boring  # (why tho?)
     python scraper.py --year 2019 --ensemble USAF --chaos  # LET'S GOOOO!!!
 """
@@ -34,8 +35,58 @@ from ascii_art import reactions
 
 BASE_URL = "https://www.midwestclinic.org/user_files_1/pdfs/concerts/{year}/{year}_{ensemble}_Concert.pdf"
 RATE_LIMIT_DELAY = 1.0  # seconds - we're CIVILIZED
+DISCOVERY_RATE_LIMIT = 0.5  # seconds - faster for discovery checks
 TIMEOUT = 30  # seconds
 OUTPUT_DIR = "programs"
+
+# Common ensemble name patterns to try during discovery
+COMMON_ENSEMBLES = [
+    # Military bands
+    "USAF", "USAFBand", "AirForce", "AirForceBand",
+    "MarinesWest", "MarinesEast", "Marines", "MarineBand",
+    "PresidentsOwn", "Presidents Own", "PresidentsOwnMarineBand",
+    "ArmyFieldBand", "ArmyBand", "Army",
+    "NavyBand", "Navy",
+    "CoastGuard", "CoastGuardBand",
+
+    # Major university programs
+    "NorthTexas", "UNT", "UniversityNorthTexas",
+    "Michigan", "UMich", "UniversityMichigan",
+    "Illinois", "UIUC", "UniversityIllinois",
+    "Northwestern", "NorthwesternUniversity",
+    "Indiana", "IndianaUniversity",
+    "Cincinnati", "UniversityCincinnati",
+    "Kansas", "UniversityKansas",
+    "Texas", "UniversityTexas", "UT",
+    "FloridaState", "FSU",
+    "Eastman", "EastmanWindEnsemble",
+    "Ithaca", "IthacaCollege",
+    "BostonUniversity", "BU",
+    "Ohio", "OhioState", "OSU",
+    "Wisconsin", "UniversityWisconsin",
+    "Minnesota", "UniversityMinnesota",
+    "Iowa", "UniversityIowa",
+    "ColoradoState", "CSU",
+    "SouthCarolina", "USC",
+    "Arizona", "ArizonaState", "ASU",
+    "WashingtonUniversity",
+
+    # Professional ensembles
+    "DallasWinds", "DallasWind",
+    "USMarineBand",
+
+    # High schools (common patterns)
+    "Buchholz", "BuchholzHighSchool",
+    "BrokenArrow", "BrokenArrowHighSchool",
+    "ColonialForge",
+    "Avon", "AvonHighSchool",
+    "Vandegrift",
+    "Hebron", "HebronHighSchool",
+    "Marcus", "MarcusHighSchool",
+    "RonaldReagan",
+    "Claudia",
+    "WilliamMason",
+]
 
 # Colors for terminal (with fallback for boring mode)
 class Colors:
@@ -286,6 +337,69 @@ def parse_year_range(year_range: str) -> List[int]:
     else:
         return [int(year_range)]
 
+def discover_ensembles(year: int, ui: ScraperUI) -> List[str]:
+    """
+    Auto-discover ensemble names for a given year by trying common patterns.
+
+    Uses HEAD requests to check if PDFs exist without downloading them.
+    Returns a list of found ensemble names.
+    """
+    if not ui.boring:
+        print(ui._colorize(reactions.get_discovery_startup(), Colors.CYAN + Colors.BOLD))
+    else:
+        print("Discovering ensembles...")
+
+    found_ensembles = []
+    total_to_check = len(COMMON_ENSEMBLES)
+
+    for idx, ensemble in enumerate(COMMON_ENSEMBLES, 1):
+        url = BASE_URL.format(year=year, ensemble=quote(ensemble))
+
+        # Show progress every 10 ensembles
+        if idx % 10 == 0 and not ui.boring:
+            progress_msg = reactions.get_discovery_progress(len(found_ensembles))
+            print(ui._colorize(f"  [{idx}/{total_to_check}] {progress_msg}", Colors.BLUE))
+
+        try:
+            # Use HEAD request for faster checking
+            response = requests.head(url, timeout=TIMEOUT, allow_redirects=True)
+
+            if response.status_code == 200:
+                found_ensembles.append(ensemble)
+                if not ui.boring:
+                    found_msg = reactions.get_discovery_found()
+                    print(ui._colorize(f"  ✅ {ensemble}: {found_msg}", Colors.GREEN))
+                else:
+                    print(f"  Found: {ensemble}")
+
+            # Rate limiting during discovery
+            time.sleep(DISCOVERY_RATE_LIMIT)
+
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError):
+            # Silently continue on errors during discovery
+            continue
+        except Exception:
+            # Catch any other errors and continue
+            continue
+
+    # Show discovery results
+    if found_ensembles:
+        if not ui.boring:
+            complete_msg = reactions.get_discovery_complete(len(found_ensembles), year)
+            print(ui._colorize(complete_msg, Colors.GREEN + Colors.BOLD))
+            print(ui._colorize(f"  Ensembles found: {', '.join(found_ensembles)}", Colors.CYAN))
+        else:
+            print(f"\nDiscovery complete: {len(found_ensembles)} ensemble(s) found")
+            print(f"Ensembles: {', '.join(found_ensembles)}")
+    else:
+        if not ui.boring:
+            none_msg = reactions.get_discovery_none_found()
+            print(ui._colorize(none_msg, Colors.RED))
+        else:
+            print("No ensembles found with common naming patterns.")
+
+    return found_ensembles
+
 # ============================================================================
 # MAIN PROGRAM
 # ============================================================================
@@ -299,6 +413,8 @@ Examples:
   %(prog)s --year 2009 --ensemble Buchholz
   %(prog)s --years 2015-2023 --ensemble USAF
   %(prog)s --list ensemble_lists/known_ensembles.txt --years 2010-2023
+  %(prog)s --year 2019 --discover
+  %(prog)s --years 2015-2020 --discover --boring
   %(prog)s --year 2019 --ensemble NorthTexas --boring
   %(prog)s --year 2019 --ensemble USAF --chaos
         """
@@ -308,6 +424,7 @@ Examples:
     parser.add_argument('--years', type=str, help='Year range (e.g., 2015-2023)')
     parser.add_argument('--ensemble', type=str, help='Single ensemble name')
     parser.add_argument('--list', type=str, dest='ensemble_list', help='File with ensemble names (one per line)')
+    parser.add_argument('--discover', action='store_true', help='Auto-discover ensembles for the specified year(s)')
     parser.add_argument('--boring', action='store_true', help='Disable all the fun (WHY?!)')
     parser.add_argument('--chaos', action='store_true', help='Turn EVERYTHING up to 11')
 
@@ -317,24 +434,14 @@ Examples:
     if not (args.year or args.years):
         parser.error("Must specify --year or --years")
 
-    if not (args.ensemble or args.ensemble_list):
-        parser.error("Must specify --ensemble or --list")
+    if not (args.ensemble or args.ensemble_list or args.discover):
+        parser.error("Must specify --ensemble, --list, or --discover")
 
     # Parse years
     if args.years:
         years = parse_year_range(args.years)
     else:
         years = [args.year]
-
-    # Parse ensembles
-    if args.ensemble_list:
-        try:
-            ensembles = load_ensemble_list(args.ensemble_list)
-        except FileNotFoundError:
-            print(f"Error: File not found: {args.ensemble_list}")
-            sys.exit(1)
-    else:
-        ensembles = [args.ensemble]
 
     # Initialize UI and stats
     ui = ScraperUI(boring=args.boring, chaos=args.chaos)
@@ -343,28 +450,62 @@ Examples:
     # Show startup banner
     ui.print_startup()
 
-    # Calculate total jobs
-    total_jobs = len(years) * len(ensembles)
-    stats.total = total_jobs
-    current_job = 0
+    # Parse ensembles (or set to None for discovery mode)
+    if args.discover:
+        # Discovery mode - will find ensembles for each year
+        ensembles = None
+        print(f"\n{ui._colorize(f'🔍 Discovery mode enabled', Colors.BOLD)}")
+        print(f"{ui._colorize(f'📅 Years to scan: {len(years)}', Colors.BOLD)}\n")
+    else:
+        # Manual mode - load ensemble list
+        if args.ensemble_list:
+            try:
+                ensembles = load_ensemble_list(args.ensemble_list)
+            except FileNotFoundError:
+                print(f"Error: File not found: {args.ensemble_list}")
+                sys.exit(1)
+        else:
+            ensembles = [args.ensemble]
 
-    print(f"\n{ui._colorize(f'📋 Jobs queued: {total_jobs}', Colors.BOLD)}")
-    print(f"{ui._colorize(f'📅 Years: {len(years)}', Colors.BOLD)}")
-    print(f"{ui._colorize(f'🎺 Ensembles: {len(ensembles)}', Colors.BOLD)}\n")
+        # Calculate total jobs for manual mode
+        total_jobs = len(years) * len(ensembles)
+        stats.total = total_jobs
+
+        print(f"\n{ui._colorize(f'📋 Jobs queued: {total_jobs}', Colors.BOLD)}")
+        print(f"{ui._colorize(f'📅 Years: {len(years)}', Colors.BOLD)}")
+        print(f"{ui._colorize(f'🎺 Ensembles: {len(ensembles)}', Colors.BOLD)}\n")
+
+    current_job = 0
 
     # Main download loop
     for year in years:
-        for ensemble in ensembles:
+        # Discover ensembles if in discovery mode
+        if args.discover:
+            year_ensembles = discover_ensembles(year, ui)
+            if not year_ensembles:
+                # No ensembles found for this year, skip it
+                continue
+            print()  # Add spacing after discovery
+        else:
+            year_ensembles = ensembles
+
+        # Download programs for this year
+        for ensemble in year_ensembles:
             current_job += 1
 
             # Show progress
-            ui.print_progress(current_job, total_jobs, str(year), ensemble)
+            if not args.discover:
+                # In manual mode, show progress with total
+                ui.print_progress(current_job, stats.total, str(year), ensemble)
+            else:
+                # In discovery mode, just show what we're downloading
+                print(f"{ui._colorize(f'Downloading: {year} - {ensemble}', Colors.BLUE + Colors.BOLD)}")
 
             # Download the program
             download_program(year, ensemble, ui, stats)
 
             # Rate limiting (be a good citizen)
-            if current_job < total_jobs:  # Don't wait after the last one
+            if not (args.discover and ensemble == year_ensembles[-1] and year == years[-1]):
                 ui.print_rate_limit()
                 time.sleep(RATE_LIMIT_DELAY)
 

@@ -4,6 +4,7 @@ A Python-based web scraper for downloading concert program PDFs from the Midwest
 
 ## Features
 
+- **Auto-Discovery Mode**: Automatically find all ensembles for a given year
 - **Single or Batch Downloads**: Download one program or hundreds
 - **Year Range Support**: Specify ranges like `2015-2023`
 - **Ensemble List Files**: Process multiple ensembles from a text file
@@ -26,6 +27,16 @@ pip install -r requirements.txt
 ## Usage
 
 ### Basic Examples
+
+**Auto-discover all ensembles for a year** (recommended!):
+```bash
+python scraper.py --year 2019 --discover
+```
+
+**Auto-discover across multiple years:**
+```bash
+python scraper.py --years 2015-2020 --discover
+```
 
 Download a single program:
 ```bash
@@ -50,6 +61,7 @@ python scraper.py --list ensemble_lists/known_ensembles.txt --years 2010-2023
 | `--years RANGE` | Year range (e.g., `--years 2015-2023`) |
 | `--ensemble NAME` | Single ensemble name (e.g., `--ensemble USAF`) |
 | `--list FILE` | File containing ensemble names (one per line) |
+| `--discover` | Auto-discover all ensembles for specified year(s) - **NEW!** |
 | `--boring` | Disables personality features for professional environments |
 | `--chaos` | Enables maximum personality mode (use at your own risk) |
 
@@ -67,6 +79,33 @@ ArmyFieldBand
 ```
 
 Lines starting with `#` are treated as comments.
+
+### Auto-Discovery Mode
+
+**Discovery mode is the easiest way to download all programs for a given year without knowing ensemble names in advance.**
+
+When you use `--discover`, the scraper:
+1. Tries ~60 common ensemble name patterns (military bands, universities, high schools, professional groups)
+2. Uses fast HEAD requests to check which PDFs exist (no downloading during discovery)
+3. Reports all found ensembles with enthusiastic commentary
+4. Automatically downloads all discovered programs
+
+**Example output:**
+```
+🔍 ENSEMBLE DISCOVERY MODE ACTIVATED 🔍
+"Time to find ALL THE PROGRAMS!"
+*detective music intensifies*
+
+  ✅ USAF: 🎉 JACKPOT! This ensemble exists!
+  ✅ NorthTexas: ✨ FOUND ONE! Adding to the list!
+  ✅ Michigan: 💎 DISCOVERED! Another program for the hoard!
+
+🎉 DISCOVERY COMPLETE! 🎉
+Found 3 ensemble(s) for 2019!
+Now let's DOWNLOAD THEM ALL!
+```
+
+**Pro tip:** Use `--discover --boring` if you want discovery without the personality.
 
 ## Output Structure
 

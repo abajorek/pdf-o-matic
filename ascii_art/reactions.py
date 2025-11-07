@@ -281,6 +281,87 @@ CHAOS_FAILURE = [
 ]
 
 # ============================================================================
+# DISCOVERY MODE MESSAGES
+# ============================================================================
+
+DISCOVERY_STARTUP = [
+    """
+🔍 ENSEMBLE DISCOVERY MODE ACTIVATED 🔍
+"Time to find ALL THE PROGRAMS!"
+*detective music intensifies*
+Scanning the archives like a BOSS...
+""",
+    """
+🕵️ GOING ON A PDF HUNT 🕵️
+"We're gonna find SO MANY ensembles!"
+*puts on detective hat*
+THE SEARCH BEGINS!
+""",
+    """
+🎯 AUTO-DISCOVERY ENGAGED 🎯
+"Let's see what's out there!"
+*rubs hands together excitedly*
+Time to discover some PREMIUM CONTENT!
+""",
+]
+
+DISCOVERY_CHECKING = [
+    "🔍 Checking...",
+    "🔎 Investigating...",
+    "👀 Looking...",
+    "🎯 Probing...",
+    "🔬 Analyzing...",
+]
+
+DISCOVERY_FOUND = [
+    "✨ FOUND ONE! Adding to the list!",
+    "🎉 JACKPOT! This ensemble exists!",
+    "💎 DISCOVERED! Another program for the hoard!",
+    "⭐ BINGO! Got 'em!",
+    "🎊 SUCCESS! Adding this beauty!",
+]
+
+DISCOVERY_PROGRESS = [
+    "Still searching... {found} found so far!",
+    "The hunt continues... {found} ensembles discovered!",
+    "Keep going... {found} programs located!",
+    "Making progress... {found} PDFs identified!",
+]
+
+DISCOVERY_COMPLETE = [
+    """
+🎉 DISCOVERY COMPLETE! 🎉
+Found {count} ensemble(s) for {year}!
+Now let's DOWNLOAD THEM ALL!
+""",
+    """
+✅ SEARCH FINISHED! ✅
+Located {count} program(s)!
+Time to ACQUIRE THE GOODS!
+""",
+    """
+🏆 MISSION ACCOMPLISHED! 🏆
+Discovered {count} ensemble(s)!
+LET'S GET THESE PDFs!
+""",
+]
+
+DISCOVERY_NONE_FOUND = [
+    """
+😢 NO ENSEMBLES FOUND 😢
+Either this year has NO programs OR
+the naming convention is COMPLETELY different!
+Try checking the Midwest Clinic archives manually.
+""",
+    """
+💀 ZERO RESULTS 💀
+Well, this is awkward...
+No programs found with common naming patterns.
+The ensemble names might be WEIRD for this year!
+""",
+]
+
+# ============================================================================
 # BORING MODE MESSAGES (for --boring flag)
 # ============================================================================
 
@@ -374,3 +455,27 @@ def get_ensemble_easter_egg(ensemble: str) -> str:
         if key.lower() in ensemble.lower():
             return random.choice(messages)
     return ""
+
+def get_discovery_startup() -> str:
+    """Get a discovery mode startup message."""
+    return random.choice(DISCOVERY_STARTUP)
+
+def get_discovery_checking() -> str:
+    """Get a discovery checking message."""
+    return random.choice(DISCOVERY_CHECKING)
+
+def get_discovery_found() -> str:
+    """Get a discovery found message."""
+    return random.choice(DISCOVERY_FOUND)
+
+def get_discovery_progress(found: int) -> str:
+    """Get a discovery progress message."""
+    return random.choice(DISCOVERY_PROGRESS).format(found=found)
+
+def get_discovery_complete(count: int, year: int) -> str:
+    """Get a discovery complete message."""
+    return random.choice(DISCOVERY_COMPLETE).format(count=count, year=year)
+
+def get_discovery_none_found() -> str:
+    """Get a discovery none found message."""
+    return random.choice(DISCOVERY_NONE_FOUND)
