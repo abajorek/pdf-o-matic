@@ -27,6 +27,21 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
+        header .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        header .logo-container img {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+        }
+
         header h1 {
             font-size: 1.75rem;
             margin-bottom: 0.5rem;
@@ -55,6 +70,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             border-top: 3px solid #860037;
+            position: relative;
         }
 
         nav h2 {
@@ -223,25 +239,16 @@
         /* Desktop styles */
         @media (min-width: 769px) {
             header {
-                position: sticky;
-                top: 0;
-                z-index: 100;
                 padding: 2rem 1rem;
             }
 
+            header .logo-container img {
+                height: 80px;
+            }
+
             nav {
-                position: sticky;
-                top: 120px;
-                z-index: 99;
-            }
-
-            .toggle-nav {
-                display: none;
-            }
-
-            .nav-content {
-                max-height: none !important;
-                overflow: visible !important;
+                max-width: 900px;
+                margin: 1rem auto;
             }
         }
 
@@ -250,6 +257,14 @@
             header {
                 position: relative;
                 padding: 1.25rem 1rem;
+            }
+
+            header .logo-container {
+                gap: 1rem;
+            }
+
+            header .logo-container img {
+                height: 45px;
             }
 
             header h1 {
@@ -293,6 +308,14 @@
 
         /* Very small mobile devices */
         @media (max-width: 480px) {
+            header .logo-container {
+                gap: 0.5rem;
+            }
+
+            header .logo-container img {
+                height: 35px;
+            }
+
             header h1 {
                 font-size: 1.2rem;
             }
@@ -318,6 +341,10 @@
 </head>
 <body>
     <header>
+        <div class="logo-container">
+            <img src="https://botw-cmu.netlify.app/cmubands-logo.png" alt="CMU Bands Logo">
+            <img src="https://botw-cmu.netlify.app/botw-logo-whitebg.png" alt="Best of the West Logo">
+        </div>
         <h1>Band Director's Practical Guide</h1>
         <p>Concrete, Repeatable Strategies for Building Your Program</p>
         <div class="cmu-branding">Colorado Mesa University</div>
