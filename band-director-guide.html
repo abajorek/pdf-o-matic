@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Band Director's Practical Guide</title>
+    <title>Band Director's Practical Guide | Colorado Mesa University</title>
     <style>
         * {
             margin: 0;
@@ -20,24 +20,32 @@
         }
 
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #860037 0%, #FF871A 100%);
             color: white;
-            padding: 2rem 1rem;
+            padding: 1.5rem 1rem;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         header h1 {
             font-size: 1.75rem;
             margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         header p {
             font-size: 0.95rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        header .cmu-branding {
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
             opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         nav {
@@ -46,15 +54,14 @@
             margin: 1rem;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 120px;
-            z-index: 99;
+            border-top: 3px solid #860037;
         }
 
         nav h2 {
             font-size: 1rem;
             margin-bottom: 0.75rem;
-            color: #667eea;
+            color: #860037;
+            font-weight: 600;
         }
 
         nav ul {
@@ -66,18 +73,19 @@
         }
 
         nav ul li a {
-            color: #667eea;
+            color: #860037;
             text-decoration: none;
             font-size: 0.9rem;
             display: block;
             padding: 0.5rem;
             border-radius: 4px;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
         }
 
         nav ul li a:hover,
         nav ul li a:active {
-            background-color: #f0f0f0;
+            background-color: #fff3cd;
+            color: #B41219;
         }
 
         main {
@@ -95,25 +103,28 @@
         }
 
         h2 {
-            color: #667eea;
+            color: #860037;
             font-size: 1.5rem;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid #667eea;
+            border-bottom: 3px solid #FFD200;
+            font-weight: 700;
         }
 
         h3 {
-            color: #764ba2;
+            color: #B41219;
             font-size: 1.2rem;
             margin-top: 1.5rem;
             margin-bottom: 0.75rem;
+            font-weight: 600;
         }
 
         h4 {
-            color: #555;
+            color: #052036;
             font-size: 1rem;
             margin-top: 1rem;
             margin-bottom: 0.5rem;
+            font-weight: 600;
         }
 
         p {
@@ -130,29 +141,30 @@
         }
 
         strong {
-            color: #764ba2;
+            color: #860037;
+            font-weight: 600;
         }
 
         .highlight {
-            background-color: #fff3cd;
+            background-color: #fff9e6;
             padding: 1rem;
-            border-left: 4px solid #ffc107;
+            border-left: 4px solid #FFD200;
             margin: 1rem 0;
             border-radius: 4px;
         }
 
         .key-point {
-            background-color: #e8f4f8;
+            background-color: #e8f7fd;
             padding: 1rem;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #1A6099;
             margin: 1rem 0;
             border-radius: 4px;
         }
 
         .strategy-box {
-            background-color: #f0f8f0;
+            background-color: #fff0f0;
             padding: 1rem;
-            border-left: 4px solid #28a745;
+            border-left: 4px solid #B41219;
             margin: 1rem 0;
             border-radius: 4px;
         }
@@ -161,7 +173,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #667eea;
+            background-color: #860037;
             color: white;
             border: none;
             border-radius: 50%;
@@ -169,18 +181,93 @@
             height: 50px;
             font-size: 1.5rem;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(134, 0, 55, 0.3);
             display: none;
             z-index: 1000;
+            font-weight: bold;
         }
 
         .back-to-top:active {
-            background-color: #764ba2;
+            background-color: #B41219;
         }
 
+        .toggle-nav {
+            background: #860037;
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .toggle-nav:active {
+            background-color: #B41219;
+        }
+
+        .nav-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .nav-content.active {
+            max-height: 600px;
+            transition: max-height 0.3s ease-in;
+        }
+
+        /* Desktop styles */
+        @media (min-width: 769px) {
+            header {
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                padding: 2rem 1rem;
+            }
+
+            nav {
+                position: sticky;
+                top: 120px;
+                z-index: 99;
+            }
+
+            .toggle-nav {
+                display: none;
+            }
+
+            .nav-content {
+                max-height: none !important;
+                overflow: visible !important;
+            }
+        }
+
+        /* Mobile styles */
         @media (max-width: 768px) {
+            header {
+                position: relative;
+                padding: 1.25rem 1rem;
+            }
+
             header h1 {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
+            }
+
+            header p {
+                font-size: 0.85rem;
+            }
+
+            header .cmu-branding {
+                font-size: 0.7rem;
+            }
+
+            nav {
+                position: relative;
+                top: 0;
+                margin-top: 1rem;
             }
 
             h2 {
@@ -195,38 +282,36 @@
                 padding: 1rem;
             }
 
-            nav {
-                top: 110px;
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+                bottom: 15px;
+                right: 15px;
             }
         }
 
-        .toggle-nav {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 0.75rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .nav-content {
-            display: none;
-        }
-
-        .nav-content.active {
-            display: block;
-        }
-
-        @media (min-width: 769px) {
-            .toggle-nav {
-                display: none;
+        /* Very small mobile devices */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.2rem;
             }
 
-            .nav-content {
-                display: block !important;
+            header p {
+                font-size: 0.8rem;
+            }
+
+            section {
+                padding: 0.875rem;
+                margin: 1rem 0;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            h3 {
+                font-size: 1.05rem;
             }
         }
     </style>
@@ -235,10 +320,11 @@
     <header>
         <h1>Band Director's Practical Guide</h1>
         <p>Concrete, Repeatable Strategies for Building Your Program</p>
+        <div class="cmu-branding">Colorado Mesa University</div>
     </header>
 
     <nav>
-        <button class="toggle-nav" onclick="toggleNav()">☰ Quick Navigation</button>
+        <button class="toggle-nav" onclick="toggleNav()" aria-label="Toggle navigation menu">☰ Quick Navigation</button>
         <div class="nav-content" id="navContent">
             <h2>Jump to Section</h2>
             <ul>
@@ -649,7 +735,7 @@
         </section>
     </main>
 
-    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Back to top">↑</button>
 
     <script>
         // Back to top button functionality
