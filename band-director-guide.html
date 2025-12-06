@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Band Director's Practical Guide | Colorado Mesa University</title>
+    <title>CMU Bands Professional Development Sessions | Colorado Mesa University</title>
     <style>
         * {
             margin: 0;
@@ -27,36 +27,43 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        header .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        header .logo-wrapper {
-            padding: 0.75rem 1.25rem;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        header .logo-wrapper.cmu-bands {
+        .floating-logo {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            z-index: 999;
             background-color: #860037;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(134, 0, 55, 0.3);
         }
 
-        header .logo-wrapper.botw {
-            background-color: #FFFFFF;
-        }
-
-        header .logo-container img {
+        .floating-logo img {
             height: 60px;
             width: auto;
             object-fit: contain;
             display: block;
+        }
+
+        .session-divider {
+            max-width: 900px;
+            margin: 3rem auto 2rem;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .session-divider hr {
+            border: none;
+            border-top: 3px solid #860037;
+            margin: 1rem 0;
+        }
+
+        .session-divider h2 {
+            color: #860037;
+            font-size: 1.8rem;
+            margin: 1rem 0;
+            border: none;
+            padding: 0;
         }
 
         header h1 {
@@ -295,17 +302,13 @@
                 padding: 2rem 1rem;
             }
 
-            header .logo-wrapper {
-                padding: 1rem 1.5rem;
-            }
-
-            header .logo-container img {
-                height: 80px;
-            }
-
             nav {
                 max-width: 900px;
                 margin: 1rem auto;
+            }
+
+            .floating-logo img {
+                height: 70px;
             }
         }
 
@@ -314,18 +317,6 @@
             header {
                 position: relative;
                 padding: 1.25rem 1rem;
-            }
-
-            header .logo-container {
-                gap: 1rem;
-            }
-
-            header .logo-wrapper {
-                padding: 0.5rem 1rem;
-            }
-
-            header .logo-container img {
-                height: 45px;
             }
 
             header h1 {
@@ -365,22 +356,20 @@
                 bottom: 15px;
                 right: 15px;
             }
+
+            .floating-logo {
+                bottom: 70px;
+                left: 10px;
+                padding: 0.5rem 0.75rem;
+            }
+
+            .floating-logo img {
+                height: 45px;
+            }
         }
 
         /* Very small mobile devices */
         @media (max-width: 480px) {
-            header .logo-container {
-                gap: 0.5rem;
-            }
-
-            header .logo-wrapper {
-                padding: 0.4rem 0.75rem;
-            }
-
-            header .logo-container img {
-                height: 35px;
-            }
-
             header h1 {
                 font-size: 1.2rem;
             }
@@ -401,41 +390,64 @@
             h3 {
                 font-size: 1.05rem;
             }
+
+            .floating-logo {
+                bottom: 65px;
+                left: 8px;
+                padding: 0.4rem 0.6rem;
+            }
+
+            .floating-logo img {
+                height: 35px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo-container">
-            <div class="logo-wrapper cmu-bands">
-                <img src="https://botw-cmu.netlify.app/cmubands-logo.png" alt="CMU Bands Logo">
-            </div>
-            <div class="logo-wrapper botw">
-                <img src="https://botw-cmu.netlify.app/botw-logo-whitebg.png" alt="Best of the West Logo">
-            </div>
-        </div>
-        <h1>Band Director's Practical Guide</h1>
-        <p>Concrete, Repeatable Strategies for Building Your Program</p>
+        <h1>CMU Bands Professional Development</h1>
+        <p>Conference Session Notes & Resources</p>
         <div class="cmu-branding">Colorado Mesa University</div>
     </header>
 
     <nav>
         <button class="toggle-nav" onclick="toggleNav()" aria-label="Toggle navigation menu">☰ Quick Navigation</button>
         <div class="nav-content" id="navContent">
-            <h2>Jump to Section</h2>
+            <h2>Sessions</h2>
             <ul>
-                <li><a href="#philosophy">I. Philosophy & Framing</a></li>
-                <li><a href="#recruitment">II. Recruitment</a></li>
-                <li><a href="#retention">III. Retention</a></li>
-                <li><a href="#scheduling">IV. Scheduling & Competing Demands</a></li>
-                <li><a href="#programming">V. Programming for Small Ensembles</a></li>
-                <li><a href="#community">VI. Community & Relationship Building</a></li>
-                <li><a href="#sustainability">VII. Personal Sustainability</a></li>
+                <li><a href="#session1"><strong>Band Director's Practical Guide</strong></a></li>
+                <li style="margin-left: 1rem;"><a href="#philosophy">Philosophy & Framing</a></li>
+                <li style="margin-left: 1rem;"><a href="#recruitment">Recruitment</a></li>
+                <li style="margin-left: 1rem;"><a href="#retention">Retention</a></li>
+                <li style="margin-left: 1rem;"><a href="#scheduling">Scheduling & Competing Demands</a></li>
+                <li style="margin-left: 1rem;"><a href="#programming">Programming for Small Ensembles</a></li>
+                <li style="margin-left: 1rem;"><a href="#community">Community & Relationship Building</a></li>
+                <li style="margin-left: 1rem;"><a href="#sustainability">Personal Sustainability</a></li>
+                <li><a href="#session2"><strong>Saxophone Technique Workshop</strong></a></li>
+                <li style="margin-left: 1rem;"><a href="#tone">Teaching Tone at Soft Dynamics</a></li>
+                <li style="margin-left: 1rem;"><a href="#air-support">Air, Support & Body Engagement</a></li>
+                <li style="margin-left: 1rem;"><a href="#reeds">Reed Selection & Matching</a></li>
+                <li style="margin-left: 1rem;"><a href="#reed-care">Reed Rotation & Storage</a></li>
+                <li style="margin-left: 1rem;"><a href="#gear">Practical Gear Recommendations</a></li>
+                <li style="margin-left: 1rem;"><a href="#habits">Day-to-Day Setup Habits</a></li>
+                <li style="margin-left: 1rem;"><a href="#embouchure">Embouchure & Inside-the-Mouth Work</a></li>
+                <li style="margin-left: 1rem;"><a href="#posture">Posture & Instrument Positioning</a></li>
+                <li style="margin-left: 1rem;"><a href="#section">Section Management</a></li>
+                <li style="margin-left: 1rem;"><a href="#recordings">Using Recordings & Video</a></li>
+                <li style="margin-left: 1rem;"><a href="#action-plan">Action Plan for Directors</a></li>
             </ul>
         </div>
     </nav>
 
     <main>
+        <div class="session-divider" id="session1">
+            <hr>
+            <h2>Band Director's Practical Guide</h2>
+            <p style="font-style: italic; color: #555;">Concrete, Repeatable Strategies for Building Your Program</p>
+            <p style="font-size: 0.9rem; color: #860037; font-weight: 600;">Hosted by Dr. Jonathan Hinkle and Mr. Andrew Bajorek</p>
+            <hr>
+        </div>
+
         <section id="philosophy">
             <h2>I. Philosophy & Framing</h2>
 
@@ -829,13 +841,383 @@
                 </ul>
             </div>
         </section>
+
+        <div class="session-divider" id="session2">
+            <hr>
+            <h2>Saxophone Technique Workshop</h2>
+            <p style="font-style: italic; color: #555;">Hosted by NSSS Quartet</p>
+            <p style="font-size: 0.9rem; color: #860037; font-weight: 600;">Dr. Stephen Page · Dr. Shawna Pennock · Dr. Nathan Mertens · Dr. Sarah Hetrick</p>
+            <hr>
+        </div>
+
+        <section id="tone">
+            <h2>1. Teaching Tone at Soft Dynamics</h2>
+
+            <h3>Core Concept</h3>
+            <p>Softer does not mean "less support"; it means:</p>
+            <ul>
+                <li>Lower air volume</li>
+                <li>Maintained / high air speed via tongue position and oral cavity shape</li>
+            </ul>
+
+            <h3>Actionable Strategies</h3>
+            <p>Use language like:</p>
+            <ul>
+                <li>"Less air volume, same air speed."</li>
+                <li>"Compress the air with your tongue, don't just back off."</li>
+            </ul>
+
+            <p>With students, have them:</p>
+            <ol>
+                <li>Play mf with a full, centered sound.</li>
+                <li>Gradually decrease volume while raising the tongue (EEE position) to keep the tone focused.</li>
+                <li>Listen for "air in the sound" and label it: "Your air is too slow; compress more with tongue/inside of mouth."</li>
+            </ol>
+
+            <h3>Quick Checks</h3>
+            <p>If the sound is airy at soft dynamics:</p>
+            <ul>
+                <li>Ask: "Where is your tongue? Say 'eee' inside your mouth."</li>
+                <li>Listen for reed noise/air → remind: "Faster air, not just less air."</li>
+            </ul>
+        </section>
+
+        <section id="air-support">
+            <h2>2. Air, "Support," and Body Engagement</h2>
+
+            <h3>Reframe "Support" → "Engagement"</h3>
+            <ul>
+                <li>Use words like <strong>engage</strong>, <strong>activate</strong>, or <strong>air energy</strong> instead of the vague "support."</li>
+                <li>Emphasize body understanding, not just verbal metaphors.</li>
+            </ul>
+
+            <h3>Straw Exercise (Core Strategy)</h3>
+            <p>Use very thin coffee stir straws.</p>
+            <div class="strategy-box">
+                <strong>Drill:</strong>
+                <ol>
+                    <li>Students blow through the straw at a "normal" air level.</li>
+                    <li>Ask them to "hit you with the air" through the straw (more intensity).</li>
+                    <li>Stop and ask: "Where did your body engage?"</li>
+                    <li>Have them feel front/side/back of torso with hands.</li>
+                    <li>Label that feeling as "good engagement" and reference it when they play.</li>
+                </ol>
+            </div>
+
+            <h3>"Dog Pant" Exercise</h3>
+            <p>Have students put a hand on the low ribs/side/back and pant like a dog:</p>
+            <ul>
+                <li>Feel obliques and back muscles fire.</li>
+                <li>Connect this to articulation and accents: "Use the same engagement you feel when panting to power your tonguing and accents."</li>
+            </ul>
+
+            <h3>Breathing Cues</h3>
+            <ul>
+                <li>Focus on rib expansion, not "stick your stomach out": "Breathe so your ribs expand in 360°."</li>
+                <li>Avoid shaming language around the belly; talk about rib cage motion and tall breathing.</li>
+            </ul>
+        </section>
+
+        <section id="reeds">
+            <h2>3. Reed Selection, Strength, and Matching to Mouthpiece</h2>
+
+            <h3>Matching, Not "Stronger Is Better"</h3>
+            <ul>
+                <li>Teach: reed choice = matching mouthpiece + environment + player, not ego.</li>
+                <li>General rule of thumb:
+                    <ul>
+                        <li>More open mouthpiece → softer reed</li>
+                        <li>More closed mouthpiece → can handle slightly harder reed</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Altitude & Climate</h3>
+            <ul>
+                <li>At higher altitudes/dry climates: Expect to use slightly softer reeds than at sea level.</li>
+                <li>Normalize this so students don't see softer reeds as a "downgrade."</li>
+            </ul>
+
+            <h3>Talking to Students</h3>
+            <div class="key-point">
+                <strong>Explicitly counter the myth:</strong>
+                <ul>
+                    <li>"Stronger reed ≠ better player."</li>
+                    <li>"The best reed is the one that lets you play in tune, with control, across dynamics."</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="reed-care">
+            <h2>4. Reed Rotation, Storage, and Wetting</h2>
+
+            <h3>Rotation System</h3>
+            <p>For high schoolers, recommend:</p>
+            <ul>
+                <li>5–8 reeds in active rotation.</li>
+                <li>Never more than ~20 minutes on a single reed when practicing intensely.</li>
+                <li>For concerts: Have a "top 2–3 reeds" ready, but still rotated in daily use.</li>
+            </ul>
+
+            <h3>Storage & Humidity</h3>
+            <ul>
+                <li>Advocate flat, ventilated or humidity-controlled cases.</li>
+                <li>Airtight reed cases with humidity packs around 58–72% RH help massively in dry climates.</li>
+                <li>Practical classroom note: Have at least one good reed case example to show.</li>
+                <li>Encourage families to invest in one quality case rather than a constant stream of emergency reeds.</li>
+            </ul>
+
+            <h3>Wetting Reeds: Water, Not Spit</h3>
+            <div class="highlight">
+                <strong>Teach students to use water cups or tiny bottles rather than saliva.</strong>
+                <ul>
+                    <li>Saliva enzymes break down the cane faster.</li>
+                    <li>Simple policy: "Reeds get water, not spit."</li>
+                </ul>
+            </div>
+
+            <h3>Diagnosing & Fixing Warp</h3>
+            <p>Show students:</p>
+            <ul>
+                <li>Flip reed over → if it "rocking chairs" or has a horseshoe bump, the back is warped.</li>
+                <li>Easy band-room fix: Lay the reed flat on clean white paper and make a few light, flat strokes to help flatten fibers after playing.</li>
+                <li>Then store in a flat case so it doesn't become a "potato chip."</li>
+            </ul>
+        </section>
+
+        <section id="gear">
+            <h2>5. Practical Gear Recommendations</h2>
+            <p style="font-style: italic; color: #555;">(Emphasize: consistency and match > brand "status.")</p>
+
+            <h3>Reeds</h3>
+            <ul>
+                <li><strong>D'Addario (Rico, Reserve, etc.)</strong>
+                    <ul>
+                        <li>Known for consistent manufacturing and good customer support.</li>
+                        <li>Official: <a href="https://www.daddario.com/products/woodwinds/" target="_blank" style="color: #860037;">https://www.daddario.com/products/woodwinds/</a></li>
+                    </ul>
+                </li>
+                <li>Vandoren "blue box" and similar are still common and fine; just stress quality control and rotation.</li>
+            </ul>
+
+            <h3>Mouthpieces</h3>
+            <p>For step-up/classical-focused students:</p>
+            <ul>
+                <li>Stable choice: Selmer C*-type and analogous designs (if your store has reliable stock).</li>
+                <li>Highlight newer CNC-machined student mouthpieces (like the CSX-style models mentioned in the session) for consistency and reasonable price.</li>
+                <li><strong>Key message:</strong> upgrade to one good, consistent mouthpiece before obsessing over exotic reeds.</li>
+            </ul>
+
+            <h3>Ligatures</h3>
+            <ul>
+                <li>Recommend simple, durable metal ligatures with reliable screws (e.g., Rovner-type or standard metal; avoid very cheap, flimsy stamped ligatures).</li>
+                <li>Emphasize:
+                    <ul>
+                        <li>Ligature should hold the reed evenly, not crush it.</li>
+                        <li>A solid $30–$50 ligature is a small investment with an outsized effect on ease of playing and lasts for years.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section id="habits">
+            <h2>6. Day-to-Day Reed & Setup Habits</h2>
+            <p>Make these into posted classroom rules:</p>
+
+            <h3>Assembly Order</h3>
+            <div class="strategy-box">
+                <strong>Mount reed on mouthpiece first, then on neck/body:</strong>
+                <ol>
+                    <li>Mouthpiece + ligature → reed placement → then attach to neck/sax.</li>
+                </ol>
+            </div>
+
+            <h3>Line-up Check</h3>
+            <ul>
+                <li>"A hairline of black": enough tip opening that a single hair laid across would just be covered by the tip of the reed.</li>
+                <li>Too much mouthpiece showing = muffled, unfocused sound.</li>
+            </ul>
+
+            <h3>Tenor & Bari Rule</h3>
+            <p>If they say it feels like a "2x4," check:</p>
+            <ul>
+                <li>Reed warp</li>
+                <li>Reed strength vs. mouthpiece opening</li>
+                <li>Moisture and storage</li>
+            </ul>
+
+            <h3>Retire Reeds When</h3>
+            <ul>
+                <li>Dynamic range has shrunk.</li>
+                <li>Tip chirps/squeaks from being too soft at the tip.</li>
+                <li>Reed has gone fully "potato chip" despite flattening attempts.</li>
+            </ul>
+        </section>
+
+        <section id="embouchure">
+            <h2>7. Embouchure and Inside-the-Mouth Work</h2>
+
+            <h3>Inside the Mouth: Tongue Height & Frontness</h3>
+            <p>Use syllables:</p>
+            <ul>
+                <li>For warmer, controlled sound: think "eee" (high, front tongue).</li>
+                <li>For students with bright/harsh/edgy tone, they may be:
+                    <ul>
+                        <li>Low tongue, far back ("aw" inside the mouth)</li>
+                        <li>Overcompensating with jaw pressure instead of tongue/air shaping.</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="key-point">
+                <strong>Simple prompt:</strong> "Say 'eee' inside your mouth as you play that note again."
+            </div>
+
+            <h3>Embouchure Language</h3>
+            <ul>
+                <li>Avoid "pressure"; use: "Necessary engagement of the corners and top lip."</li>
+                <li>"Corners in and forward, not down/biting."</li>
+            </ul>
+
+            <h3>Quick Tests</h3>
+            <ul>
+                <li>Have them form embouchure without instrument, then add mouthpiece.</li>
+                <li>Use analogies like the "French cow" (moo → "meu") to get the upper lip engaged and lifted.</li>
+            </ul>
+        </section>
+
+        <section id="posture">
+            <h2>8. Posture and Instrument Positioning</h2>
+
+            <h3>Simple, Repeatable Cues</h3>
+            <div class="highlight">
+                <strong>Use a chant (especially with younger players):</strong>
+                <p>"Feet flat, back tall, knees on the hump."</p>
+            </div>
+            <ul>
+                <li>Replace "sit up straight" with: "Sit tall," "Find your sit bones," "String lifting the crown of your head."</li>
+            </ul>
+
+            <h3>Saxophone Position</h3>
+            <p><strong>Core rule:</strong> Instrument goes to the body, not body to instrument.</p>
+
+            <h4>For Alto</h4>
+            <ul>
+                <li>Move to center position as soon as they're tall enough that: Right hand clears thighs without the wrist bending downwards.</li>
+            </ul>
+
+            <h4>For Neck Straps</h4>
+            <ul>
+                <li>Adjust strap while student is already sitting tall.</li>
+                <li>Mouthpiece should meet the mouth without the student dropping the head or jutting the chin.</li>
+            </ul>
+        </section>
+
+        <section id="section">
+            <h2>9. Section Management: Tenor & Bari</h2>
+
+            <h3>Pairing & Seating</h3>
+            <p>Whenever possible:</p>
+            <ul>
+                <li>Put two students on tenor and bari parts.</li>
+                <li>Or at least seat them near each other so they can hear a "sectional buddy."</li>
+            </ul>
+
+            <h4>Rationale</h4>
+            <ul>
+                <li>These parts are often under-supported and harmonically different; players tend to underplay.</li>
+                <li>A buddy setup = more confidence, better pitch and style consistency.</li>
+            </ul>
+
+            <h3>Sound Concept</h3>
+            <p>Encourage them to listen to professional tenor and bari recordings and copy:</p>
+            <ul>
+                <li>Warmth</li>
+                <li>Core to the sound</li>
+                <li>Connection to the rest of the sax section.</li>
+            </ul>
+        </section>
+
+        <section id="recordings">
+            <h2>10. Using Recordings and Video to Shape Sound Concepts</h2>
+
+            <h3>Showing the "Right Sound" in Class</h3>
+            <p>Build a short playlist of high-level classical and contemporary saxophonists:</p>
+            <div class="key-point">
+                <strong>Examples mentioned:</strong>
+                <ul>
+                    <li>Nobuya Sugawa</li>
+                    <li>Steven Page</li>
+                    <li>Steven Banks</li>
+                    <li>Your session clinicians' own quartet and solo videos (highly produced YouTube content)</li>
+                </ul>
+            </div>
+
+            <h3>Strategy</h3>
+            <ul>
+                <li>Use short clips (30–60 seconds) at the start of class or sectionals.</li>
+                <li>Ask:
+                    <ul>
+                        <li>"Describe this tone in 3 words."</li>
+                        <li>"How focused is the sound? How warm? How clear is the articulation?"</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Homework & Listening</h3>
+            <ul>
+                <li>Give students specific search phrases, e.g.: "Search YouTube for 'Steven Banks saxophone' and pick one piece to describe."</li>
+            </ul>
+            <div class="highlight">
+                <strong>Emphasize:</strong> "You can't sound like what you've never heard."
+            </div>
+        </section>
+
+        <section id="action-plan">
+            <h2>11. Session-Based "Next Week" Action Plan for Directors</h2>
+
+            <h3>This Week</h3>
+            <ul>
+                <li>Introduce straw exercise to full band.</li>
+                <li>Post a "Reed Care Checklist" in the band room: water, rotation, case, warp check.</li>
+            </ul>
+
+            <h3>Within 2 Weeks</h3>
+            <ul>
+                <li>Audit sax section setups:
+                    <ul>
+                        <li>Neck strap height</li>
+                        <li>Mouthpiece placement</li>
+                        <li>Tenor/bari seating & pairing</li>
+                    </ul>
+                </li>
+                <li>Have saxes bring all active reeds → help them build a 5–8 reed rotation.</li>
+            </ul>
+
+            <h3>Within 1 Month</h3>
+            <ul>
+                <li>Recommend or bulk-order:
+                    <ul>
+                        <li>1–2 consistent student mouthpiece models for step-up players.</li>
+                        <li>At least one good ligature model to suggest to parents.</li>
+                    </ul>
+                </li>
+                <li>Start a listening log: 1 short professional sax clip per week.</li>
+            </ul>
+        </section>
     </main>
 
     <footer>
-        <h3>Attribution</h3>
-        <p><span class="hosted-by">Session hosted by Dr. Jonathan Hinkle and Mr. Andrew Bajorek.</span></p>
+        <h3>Session Attribution</h3>
+        <p><span class="hosted-by">Band Director's Practical Guide</span> hosted by Dr. Jonathan Hinkle and Mr. Andrew Bajorek.</p>
         <p class="thanks">Special thanks to: Hans Snell, Isaac Lavadie, Ryan Crabtree, Lucas Regnell, Valerie White, Stuart Johnson, Pat Sheely, and Keith Koepsel.</p>
+
+        <p style="margin-top: 1.5rem;"><span class="hosted-by">Saxophone Technique Workshop</span> hosted by NSSS Quartet:</p>
+        <p class="thanks">Dr. Stephen Page, Dr. Shawna Pennock, Dr. Nathan Mertens, and Dr. Sarah Hetrick.</p>
     </footer>
+
+    <div class="floating-logo">
+        <img src="https://botw-cmu.netlify.app/cmubands-logo.png" alt="CMU Bands Logo">
+    </div>
 
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Back to top">↑</button>
 
