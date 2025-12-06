@@ -31,15 +31,32 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-bottom: 1rem;
             flex-wrap: wrap;
+        }
+
+        header .logo-wrapper {
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header .logo-wrapper.cmu-bands {
+            background-color: #860037;
+        }
+
+        header .logo-wrapper.botw {
+            background-color: #FFFFFF;
         }
 
         header .logo-container img {
             height: 60px;
             width: auto;
             object-fit: contain;
+            display: block;
         }
 
         header h1 {
@@ -207,6 +224,42 @@
             background-color: #B41219;
         }
 
+        footer {
+            background: white;
+            padding: 2rem 1rem;
+            margin: 2rem 1rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-top: 3px solid #860037;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer h3 {
+            color: #860037;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        footer p {
+            color: #333;
+            line-height: 1.8;
+            margin: 0.5rem 0;
+        }
+
+        footer .hosted-by {
+            font-weight: 600;
+            color: #860037;
+        }
+
+        footer .thanks {
+            margin-top: 1rem;
+            font-style: italic;
+            color: #555;
+        }
+
         .toggle-nav {
             background: #860037;
             color: white;
@@ -242,6 +295,10 @@
                 padding: 2rem 1rem;
             }
 
+            header .logo-wrapper {
+                padding: 1rem 1.5rem;
+            }
+
             header .logo-container img {
                 height: 80px;
             }
@@ -261,6 +318,10 @@
 
             header .logo-container {
                 gap: 1rem;
+            }
+
+            header .logo-wrapper {
+                padding: 0.5rem 1rem;
             }
 
             header .logo-container img {
@@ -312,6 +373,10 @@
                 gap: 0.5rem;
             }
 
+            header .logo-wrapper {
+                padding: 0.4rem 0.75rem;
+            }
+
             header .logo-container img {
                 height: 35px;
             }
@@ -342,8 +407,12 @@
 <body>
     <header>
         <div class="logo-container">
-            <img src="https://botw-cmu.netlify.app/cmubands-logo.png" alt="CMU Bands Logo">
-            <img src="https://botw-cmu.netlify.app/botw-logo-whitebg.png" alt="Best of the West Logo">
+            <div class="logo-wrapper cmu-bands">
+                <img src="https://botw-cmu.netlify.app/cmubands-logo.png" alt="CMU Bands Logo">
+            </div>
+            <div class="logo-wrapper botw">
+                <img src="https://botw-cmu.netlify.app/botw-logo-whitebg.png" alt="Best of the West Logo">
+            </div>
         </div>
         <h1>Band Director's Practical Guide</h1>
         <p>Concrete, Repeatable Strategies for Building Your Program</p>
@@ -761,6 +830,12 @@
             </div>
         </section>
     </main>
+
+    <footer>
+        <h3>Attribution</h3>
+        <p><span class="hosted-by">Session hosted by Dr. Jonathan Hinkle and Mr. Andrew Bajorek.</span></p>
+        <p class="thanks">Special thanks to: Hans Snell, Isaac Lavadie, Ryan Crabtree, Lucas Regnell, Valerie White, Stuart Johnson, Pat Sheely, and Keith Koepsel.</p>
+    </footer>
 
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Back to top">↑</button>
 
